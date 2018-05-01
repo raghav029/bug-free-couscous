@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Room;
 use Illuminate\Http\RedirectResponse;
+use App\RoomCategory;
 
 
 class RoomController extends Controller
@@ -33,16 +34,23 @@ class RoomController extends Controller
 
     public function create()
     {
-        return view('rooms.create');
+        $roomsCategory = RoomCategory::pluck('name','id');
+        return view('rooms.create', compact('roomsCategory'));
     }
     
 
     public function store(Request $request)
     {
-        // print_r($request->all());
-        $rooms = new Room($request->all());
-        $rooms->user_id = $request->user()->id;
-        $rooms->save();
-        return redirect()->route('roomIndex');
+        // dd($request->all());exit();
+        try{
+            $rooms = new Room($request->all());
+            $rooms->user_id = $request->user()->id;
+            $rooms->save();
+            Session::flash('success','New Room have been added.');
+            return redirect()->route('roomIndex');
+        }catch(Exception $e){
+            report($e);
+            return false;
+        }
     }
 }

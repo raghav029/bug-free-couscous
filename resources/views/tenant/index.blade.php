@@ -8,23 +8,28 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                <table class="table table-stripped">
+                @if(Session::has('success'))
+                    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
+                @endif
+                <table>
                     <tr>
                     <th>Name:</th>
-                    <th>Number:</th>
+                    <th>Email:</th>
+                    <th>Phone:</th>
                     <th>Description:</th>
                     <th>Action:</th>
                     </tr>
-                    @foreach ($rooms as $room)
+                    @foreach ($tenants as $tenant)
                     <tr>
-                        <td>{{ $room->name }}</td>
-                        <td>{{ $room->number }}</td>
-                        <td>{{ $room->description }}</td>
+                        <td>{{ $tenant->name }}</td>
+                        <td>{{ $tenant->email }}</td>
+                        <td>{{ $tenant->phone }}</td>
+                        <td>{{ $tenant->description }}</td>
                         <td>Edit | Delete</td>
                     </tr>
                     @endforeach
                 </table>
-                {{ $rooms->links() }}
+                {{ $tenants->links() }}
                 </div>
             </div>
         </div>

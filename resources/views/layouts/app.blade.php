@@ -8,6 +8,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="base_url" content="{{ URL::to('/') }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -72,5 +73,7 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTenantsTable extends Migration
+class CreateRoomsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateTenantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tenants', function (Blueprint $table) {
+        Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('description');
+            $table->string('number')->unique();
+            $table->text('description');
+            $table->integer('strength');
+            $table->unsignedInteger('room_category_id');
             $table->unsignedInteger('user_id');
+            $table->boolean('is_active');
             $table->timestamps();
+            $table->foreign('room_category_id')->references('id')->on('room_category');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
@@ -32,6 +35,6 @@ class CreateTenantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tenants');
+        Schema::dropIfExists('rooms');
     }
 }

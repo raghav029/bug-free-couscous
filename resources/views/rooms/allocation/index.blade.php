@@ -8,23 +8,23 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                <table class="table table-stripped">
+                <table>
                     <tr>
-                    <th>Name:</th>
-                    <th>Number:</th>
+                    <th>Tenant Name:</th>
+                    <th>Room Number:</th>
                     <th>Description:</th>
                     <th>Action:</th>
                     </tr>
-                    @foreach ($rooms as $room)
+                    @foreach ($allocatedRooms as $allocation)
                     <tr>
-                        <td>{{ $room->name }}</td>
-                        <td>{{ $room->number }}</td>
-                        <td>{{ $room->description }}</td>
+                        <td>{{ $allocation->tenant_name }}</td>
+                        <td>{{ $allocation->room_name }}</td>
+                        <td>{{ $allocation->description }}</td>
                         <td>Edit | Delete</td>
                     </tr>
                     @endforeach
                 </table>
-                {{ $rooms->links() }}
+                {{ $allocatedRooms->links() }}
                 </div>
             </div>
         </div>

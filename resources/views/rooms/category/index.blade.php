@@ -8,23 +8,21 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                <table class="table table-stripped">
+                <table>
                     <tr>
                     <th>Name:</th>
                     <th>Number:</th>
-                    <th>Description:</th>
                     <th>Action:</th>
                     </tr>
-                    @foreach ($rooms as $room)
+                    @foreach ($roomCategories as $roomCate)
                     <tr>
-                        <td>{{ $room->name }}</td>
-                        <td>{{ $room->number }}</td>
-                        <td>{{ $room->description }}</td>
+                        <td>{{ $roomCate->name }}</td>
+                        <td>{{ $roomCate->is_active }}</td>
                         <td>Edit | Delete</td>
                     </tr>
                     @endforeach
                 </table>
-                {{ $rooms->links() }}
+                {{ $roomCategories->links() }}
                 </div>
             </div>
         </div>

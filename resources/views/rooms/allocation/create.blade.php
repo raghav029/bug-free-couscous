@@ -13,24 +13,21 @@
                     <p class="alert alert-{{ $key }}">{{ Session::get($key) }}</p>
                 @endif
                 @endforeach
-                    <form action="{{ route('roomStore') }}" method="POST">
+                    <form action="{{ route('roomAllocationStore') }}" method="POST">
                     {{ csrf_field() }}
-                        {!! Form::Label('name', 'Room name:') !!}
-                        {!! Form::text('name', '', ['class'=> 'form-control']) !!}
-                        
-                        {!! Form::Label('room_number', 'Room number:') !!}
-                        {!! Form::text('number', '', ['class'=> 'form-control']) !!}
-                        
                         {!! Form::Label('description', 'Description:') !!}
                         {!! Form::textarea('description', '', ['class'=> 'form-control']) !!}
                         
-                        {!! Form::Label('strength', 'Room Strength:') !!}
-                        {!! Form::number('strength', '', ['class'=> 'form-control']) !!}
                         
+                        {!! Form::label('tenant_id', 'Tenants:') !!}
+                        {!! Form::select('tenant_id', $tenants, null,['placeholder' => 'Please select ...','class'=> 'form-control']) !!}
                         
-                        {!! Form::Label('roomsCategory', 'Room Category:') !!}
-                        {!! Form::select('room_category_id', $roomsCategory, $roomsCategory, ['class' => 'form-control']) !!}
+                        {!! Form::label('room_category_id', 'Room Category:') !!}
+                        {!! Form::select('room_category_id', $roomsCategory, null,['placeholder' => 'Please select ...','class'=> 'form-control']) !!}
                         
+                        {!! Form::label('room', 'Room:') !!}
+                        {!! Form::select('room_id', ['default'=>'Please select a room'], 'default',['class'=> 'form-control', 'id'=>'rooms_select']) !!}
+                          
                         
                         Active: {!! Form::radio('is_active', 1, true) !!}
                         Inactive:{!! Form::radio('is_active',0) !!}
