@@ -1,17 +1,35 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
 
-@section('content')
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="base_url" content="{{ URL::to('/') }}">
+    <title>{{ config('app.name', 'Hostel Management') }}</title>
+
+
+    <!-- Styles -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
+</head>
+<body>
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" role="form" style="display: block;">
                         @csrf
 
-                        <div class="form-group row">
+                        <div class="form-group">
                             <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
@@ -62,8 +80,11 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
+                </div>
+			</div>
+		</div>
+	</div>
 </div>
-@endsection
+</div>
+</body>
+</html>

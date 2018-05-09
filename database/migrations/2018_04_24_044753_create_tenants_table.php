@@ -17,6 +17,8 @@ class CreateTenantsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->string('phone');
             $table->string('description');
             $table->integer('room_allocation_status');

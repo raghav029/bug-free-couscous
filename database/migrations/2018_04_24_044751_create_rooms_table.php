@@ -19,6 +19,7 @@ class CreateRoomsTable extends Migration
             $table->string('number')->unique();
             $table->text('description');
             $table->integer('strength');
+            $table->decimal('rent',8, 2);
             $table->unsignedInteger('room_category_id');
             $table->unsignedInteger('user_id');
             $table->boolean('is_active');

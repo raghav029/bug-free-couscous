@@ -7,6 +7,7 @@ use App\Tenant;
 use Illuminate\Http\RedirectResponse;
 use App\Room;
 use App\RoomCategory;
+use App\RequestType;
 
 class TenantController extends Controller
 {
@@ -17,7 +18,10 @@ class TenantController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['tenantHome']);
+        // $this->middleware('');
+        // echo "into tenant";exit();
+        // $this->middleware('tenant');
     }
 
     public function index()
@@ -42,5 +46,18 @@ class TenantController extends Controller
         \Session::flash('success','New tenant have been added.');
         // dd($request->all());
         return redirect()->route('tenantIndex');
+    }
+
+    public function tenantHome()
+    {
+        // dd(Auth::tenants()->name);
+        $tenant = Tenant::with('rooms')->find(session('tenant_id'));
+        return view('tenant.frontend.index', compact('tenant'));
+    }
+
+    public function tenantRequests()
+    {
+        $request_types = RequestType::get();
+        // return view('');
     }
 }

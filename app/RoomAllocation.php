@@ -12,5 +12,13 @@ class RoomAllocation extends Model
 
     protected $table = "room_allocation";
 
+    public function tenant()
+    {
+        return $this->belongsTo('App\Tenant');
+    }
 
+    public function room()
+    {
+        return $this->belongsTo('App\Room');
+    }
 }

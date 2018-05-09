@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Create Room</h1>
+        </div>
                 <div class="card-body">
                 @foreach (['danger', 'warning', 'success', 'info'] as $key)
                 @if(Session::has($key))
@@ -31,15 +30,19 @@
                         {!! Form::Label('roomsCategory', 'Room Category:') !!}
                         {!! Form::select('room_category_id', $roomsCategory, $roomsCategory, ['class' => 'form-control']) !!}
                         
+                        {!! Form::Label('rent', 'Rent:') !!}
+                        {!! Form::number('rent', '', ['class' => 'form-control']) !!}
+                        
                         
                         Active: {!! Form::radio('is_active', 1, true) !!}
                         Inactive:{!! Form::radio('is_active',0) !!}
                         <br>
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-warning">Clear</button>
+                        <a type="button" class="btn btn-danger" href="{{ route('roomIndex') }}">Back</a>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 @endsection
