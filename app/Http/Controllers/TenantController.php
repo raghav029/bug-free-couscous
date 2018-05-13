@@ -26,7 +26,7 @@ class TenantController extends Controller
 
     public function index()
     {
-        $tenants = Tenant::paginate(10);
+        $tenants = Tenant::where('is_active',1)->paginate(10);
         return view('tenant.index', compact('tenants'));
     }
 
@@ -46,6 +46,39 @@ class TenantController extends Controller
         \Session::flash('success','New tenant have been added.');
         // dd($request->all());
         return redirect()->route('tenantIndex');
+    }
+
+    public function edit($id)
+    {
+        $tenant = Tenant::find($id);
+        return view('tenant.edit', compact('tenant'));
+    }
+
+    public function delete($id)
+    {
+        $tenant = Tenant::find($id);
+        $tenant->is_active = 0;
+        if($tenant->save()){
+            \Session::flash('success', 'Tenant have been deleted.');
+        }else{
+            \Session::flash('error', 'Unable to delete tenant.');
+        }
+        return redirect()->back();
+    }
+
+    public function update(Request $request)
+    {
+        $tenant = Tenant::find($request->id);
+        $tenant->name = $request->name;
+        $tenant->email = $request->email;
+        $tenant->phone = $request->phone;
+        $tenant->description = $request->description;
+        if($tenant->save()){
+            \Session::flash('success', 'Tenant have been updated.');
+        }else{
+            \Session::flash('error', 'Unable to update Tenant.');
+        }
+        return redirect()->back();
     }
 
     public function tenantHome()

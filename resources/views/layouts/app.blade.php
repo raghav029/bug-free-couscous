@@ -13,10 +13,10 @@
 
 
     <!-- Styles -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/metisMenu.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/sb-admin-2.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
+    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/metisMenu.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/sb-admin-2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/font-awesome/css/font-awesome.min.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -145,7 +145,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="{{url('/')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Rooms<span class="fa arrow"></span></a>
@@ -159,7 +159,75 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Tenants<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{route('tenantIndex')}}">Tenants</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('roomIndex')}}">Room Allocation</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Requests<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ route('requestAdminIndex') }}">All</a>
+                                </li>
+                                <li>
+                                    <a href="#">Change of Room</a>
+                                </li>
+                                <li>
+                                    <a href="#}">Food</a>
+                                </li>
+                                <li>
+                                    <a href="#">Laundry</a>
+                                </li>
+                                <li>
+                                    <a href="#">Others</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Billing<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Utility Bills</a>
+                                </li>
+                                <li>
+                                    <a href="#">Hostel Expense</a>
+                                </li>
+                                <li>
+                                    <a href="#">Rent</a>
+                                </li>
+                                <li>
+                                    <a href="#">Others</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Reports<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Tenants</a>
+                                </li>
+                                <li>
+                                    <a href="#">Total revenue</a>
+                                </li>
+                                <li>
+                                    <a href="#">Rent</a>
+                                </li>
+                                <li>
+                                    <a href="#">Others</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -171,10 +239,10 @@
             @yield('content')
         </div>
     </div>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
-    <script src="{{ asset('js/scripts.js') }}"></script>
+    <script src="{{ asset('public/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('public/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('public/js/scripts.js') }}"></script>
 </body>
 </html>

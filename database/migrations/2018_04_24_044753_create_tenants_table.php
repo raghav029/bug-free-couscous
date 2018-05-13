@@ -23,6 +23,7 @@ class CreateTenantsTable extends Migration
             $table->string('description');
             $table->integer('room_allocation_status');
             $table->unsignedInteger('user_id');
+            $table->boolean('is_active');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

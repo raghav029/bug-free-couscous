@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Create Room</h1>
+        </div>
                 <div class="card-body">
+                @foreach (['danger', 'warning', 'success', 'info'] as $key)
+                @if(Session::has($key))
+                    <p class="alert alert-{{ $key }}">{{ Session::get($key) }}</p>
+                @endif
+                @endforeach
                     <form action="{{ route('tenantStore') }}" method="POST">
                     {{ csrf_field() }}
 
@@ -23,13 +27,13 @@
                         {!! Form::text('description', '', ['class'=> 'form-control']) !!}
                         
                         
-                        <!-- <input type="text" name="number"> -->
-                        <!-- <label></label> -->
+                        <br>
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-warning">Clear</button>
+                        <a type="button" class="btn btn-danger" href="{{ route('roomIndex') }}">Back</a>
                     </form>
-                </div>
+                    </div>
             </div>
         </div>
-    </div>
 </div>
 @endsection

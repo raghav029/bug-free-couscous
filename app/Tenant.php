@@ -12,7 +12,7 @@ class Tenant extends Authenticatable
 
     protected $guard = 'tenant';
 
-    protected $fillable = ['name', 'email', 'phone', 'description', 'room_id','user_id', 'room_allocation_status'];
+    protected $fillable = ['name', 'email', 'phone', 'description', 'room_id','user_id', 'room_allocation_status', 'is_active'];
 
     protected $guarded = ['_token'];
 

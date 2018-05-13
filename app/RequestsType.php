@@ -4,7 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RequestType extends Model
+class RequestsType extends Model
 {
     protected $table = 'requests_type';
+
+    protected $primaryKey = "id";
 }
