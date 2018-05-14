@@ -4,23 +4,9 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Room Allocation</h1>
-            <div class="text-right">
-                <a href="{{route('roomAllocationCreate')}}" class="btn btn-primary">Create</a>
-            </div>
+            <h1 class="page-header">Edit Room Allocation</h1>
         </div>
-        <br>
-            @if(Session::has('success'))
-                <div class="alert alert-success">
-                    <span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em>
-                </div>
-            @elseif(Session::has('error'))
-                <div class="alert alert-error">
-                    <span class="glyphicon glyphicon-warning-sign"></span><em> {!! session('error') !!}</em>
-                </div>
-            @endif
-                <div class="card-body">
-                @foreach (['danger', 'warning', 'success', 'info'] as $key)
+                @foreach (['danger', 'warning', 'success', 'error','info'] as $key)
                 @if(Session::has($key))
                     <p class="alert alert-{{ $key }}">{{ Session::get($key) }}</p>
                 @endif
@@ -30,12 +16,13 @@
                         {!! Form::Label('description', 'Description:') !!}
                         {!! Form::textarea('description', '', ['class'=> 'form-control']) !!}
                         
+                
                         
                         {!! Form::label('tenant_id', 'Tenants:') !!}
-                        {!! Form::select('tenant_id', $tenants, null,['placeholder' => 'Please select ...','class'=> 'form-control']) !!}
+                        {!! Form::select('tenant_id', ['default'=>'Please select a room'], null,['placeholder' => 'Please select ...','class'=> 'form-control']) !!}
                         
                         {!! Form::label('room_category_id', 'Room Category:') !!}
-                        {!! Form::select('room_category_id', $roomsCategory, null,['placeholder' => 'Please select ...','class'=> 'form-control']) !!}
+                        {!! Form::select('room_category_id', ['default'=>'Please select a room'], null,['placeholder' => 'Please select ...','class'=> 'form-control']) !!}
                         
                         {!! Form::label('room', 'Room:') !!}
                         {!! Form::select('room_id', ['default'=>'Please select a room'], 'default',['class'=> 'form-control', 'id'=>'rooms_select']) !!}

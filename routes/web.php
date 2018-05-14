@@ -39,6 +39,8 @@ Route::prefix('admin')->group(function(){
             Route::get('/', 'RoomAllocationController@index')->name('roomAllocationIndex');
             Route::get('/create', 'RoomAllocationController@create')->name('roomAllocationCreate');
             Route::post('/store', 'RoomAllocationController@store')->name('roomAllocationStore');
+            Route::get('/edit/{id}', 'RoomAllocationController@edit')->name('roomAllocationEdit');
+            Route::get('/delete/{id}', 'RoomAllocationController@delete')->name('roomAllocationDelete');
         });
     });
     
@@ -62,6 +64,14 @@ Route::prefix('admin')->group(function(){
     Route::prefix('requests')->group(function() {
         Route::get('/', 'RequestController@adminIndex')->name('requestAdminIndex');
         Route::get('/view/{id}', 'RequestController@adminRequestView')->name('requestView');
+    });
+
+    Route::prefix('/bills')->group(function() {
+        Route::get('/', 'BillController@index')->name('billIndex');
+        Route::get('/create', 'BillController@create')->name('billCreate');
+        Route::post('/store', 'BillController@store')->name('billStore');
+        Route::get('/view/{id}', 'BillController@view')->name('billView');
+        Route::get('/disperse/{id}', 'BillController@disperse')->name('billDisperse');
     });
 });
 

@@ -23,7 +23,7 @@ class RoomAllocationController extends Controller
         $allocatedRooms = DB::table('room_allocation as ra')
         ->leftjoin('rooms as r', 'r.id', 'ra.room_id')
         ->leftjoin('tenants as t', 't.id', 'ra.tenant_id')
-        ->select('ra.description','t.name as tenant_name', 'r.name as room_name', 'ra.updated_at as allocation_date')
+        ->select('ra.id','ra.description','t.name as tenant_name', 'r.name as room_name', 'ra.updated_at as allocation_date')
         ->where('ra.is_active', 1)
         ->paginate(10);
         return view('rooms.allocation.index', compact('allocatedRooms'));
@@ -48,5 +48,11 @@ class RoomAllocationController extends Controller
         ]);
         return redirect()->back();
         // dd($request->all());
+    }
+
+    public function edit($id)
+    {
+        $roomAllocation = DB::table('room_allocation')->where('id', $id)->first();
+        return view('rooms.allocation.edit', compact('roomAllocation'));
     }
 }

@@ -166,7 +166,7 @@
                                     <a href="{{route('tenantIndex')}}">Tenants</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('roomIndex')}}">Room Allocation</a>
+                                    <a href="{{route('roomAllocationIndex')}}">Room Allocation</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -196,10 +196,10 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Billing<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Utility Bills</a>
+                                    <a href="{{ route('billIndex') }}">All</a>
                                 </li>
                                 <li>
-                                    <a href="#">Hostel Expense</a>
+                                    <a href="#">Room Bills</a>
                                 </li>
                                 <li>
                                     <a href="#">Rent</a>

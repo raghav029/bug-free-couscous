@@ -6,12 +6,12 @@
         <div class="col-lg-12">
             <h1 class="page-header">Create Room</h1>
         </div>
-                <div class="card-body">
                 @foreach (['danger', 'warning', 'success', 'error','info'] as $key)
                 @if(Session::has($key))
                     <p class="alert alert-{{ $key }}">{{ Session::get($key) }}</p>
                 @endif
                 @endforeach
+                <div class="card-body">
                     <form action="{{ route('roomUpdate') }}" method="POST">
                     {{ csrf_field() }}
                     {!! Form::hidden('id', $room->id) !!}
