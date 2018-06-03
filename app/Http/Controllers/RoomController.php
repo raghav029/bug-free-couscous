@@ -8,6 +8,8 @@ use App\Room;
 use Illuminate\Http\RedirectResponse;
 use App\RoomCategory;
 use App\Tenant;
+use DB;
+use App\RoomAllocation;
 
 
 class RoomController extends Controller
@@ -66,6 +68,7 @@ class RoomController extends Controller
 
     public function delete($id)
     {
+        $room_allocation = RoomAllocation::where('room_id', $id)->get();
         $room = Room::find($id);
         $room->is_active = 0;
         if($room->save()){
@@ -90,6 +93,22 @@ class RoomController extends Controller
         }else{
             \Session::flash('error', 'Unable to update room.');
         }
+        return redirect()->back();
+    }
+
+    public function rentView($id, $room_id)
+    {
+        $tenants_of_room = DB::table('room_allocation as ra')
+        ->leftjoin('tenants as t', 'ra.tenant_id', 't.id')
+        ->where('ra.id', $id)
+        ->where('ra.room_id', $room_id)
+        ->select(DB::raw('count(tenant_id) as total_tenants'))
+        ->first();
+        $roomAllocation = DB::table('room_allocation')
+        ->where('room_id', $room_id)->get();
+        $room = Room::find($room_id);
+        $rent = $room->rent / $tenants_of_room->total_tenants;
+        \Session::flash("success", "Rent has been divided");
         return redirect()->back();
     }
 }

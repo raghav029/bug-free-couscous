@@ -24,7 +24,10 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-login">
                 <div class="card-header">{{ __('Login') }}</div>
-
+                <ul class="nav navbar-top-links navbar-right">
+                <li><a class="nav-link" href="{{ route('tenatLogin') }}">{{ __('Login as Tenant') }}</a></li>
+                <!-- <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li> -->
+                </ul>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" role="form" style="display: block;">
                         @csrf
@@ -43,7 +46,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -57,7 +60,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group">
                             <div class="col-md-6 offset-md-4">
                                 <div class="checkbox">
                                     <label>
@@ -80,11 +83,9 @@
                         </div>
                     </form>
                 </div>
-                </div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 </body>
 </html>

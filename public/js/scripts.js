@@ -20,6 +20,59 @@ $(function(){
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
+
+
+    $('#room_id').on('change', function(e){
+        // console.log( $(this).val());
+        $.ajax({
+            url: url+"/ajax/get_rooms_rent/"+$(this).val(),
+            type:'GET',
+            // data: {"room_id": $(this).val()},
+            success: function(data){
+                console.log(data);
+                $("#rent").val(data);
+            }
+        })
+    })
+
+    $(".payments").on("click", function(e){
+        console.log(this.id);
+        $.ajax({
+            url: url+'/ajax/get_tenant_bill',
+            type: 'POST',
+            data: {"tenant_bill_id": this.id, "_token": CSRF_TOKEN},
+            success: function(result){
+                $("#amount").val(result.amount)
+                $("#tenant_id").val(result.tenant_id)
+            }
+        })
+    })
+
+    $(".make_payment").on("click", function(e){
+        // console.log($("#discount").val());
+        // console.log($("#amount").val());
+
+        $.ajax({
+            url: url+'/ajax/post_tenant_bill',
+            type: 'POST',
+            data: {
+                "amount": $("#amount").val(), 
+                "discount": $("#discount").val(), 
+                "tenant_id": $("#tenant_id").val(),
+                "_token": CSRF_TOKEN 
+            },
+            success: function(result){
+                if(result.status == 1){
+                    $(".btn-default").click();
+                    alert(result.message);
+                }
+            }
+        })
+    })
+
+    $("#edit_settings").on("click", function(e){
+        
+    })
     
 })
 

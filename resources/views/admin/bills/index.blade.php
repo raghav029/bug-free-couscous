@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Admin Dashboard</h1>
+            <h1 class="page-header">Bills</h1>
         </div>
             <div class="text-right">
                 <a href="{{route('billCreate')}}" class="btn btn-primary">Create</a>

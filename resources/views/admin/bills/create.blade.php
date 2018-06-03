@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Create Room</h1>
+            <h1 class="page-header">Bills - Create</h1>
         </div>
                 <div class="card-body">
                 @foreach (['danger', 'warning', 'success', 'info'] as $key)

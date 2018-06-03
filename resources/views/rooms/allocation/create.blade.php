@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Room Allocation</h1>
+            <h1 class="page-header">Create Room Allocation</h1>
             <div class="text-right">
                 <a href="{{route('roomAllocationCreate')}}" class="btn btn-primary">Create</a>
             </div>

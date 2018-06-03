@@ -41,57 +41,20 @@
                         <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
+                        @foreach($requests as $request)
                         <li>
-                            <a href="#">
+                            <a href="{{ route('requestView', $request->id) }}">
                                 <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                    <i class="fa fa-comment fa-fw"></i> {{ $request->request_name }}
+                                    <span class="pull-right text-muted small">
+                                    <time datetime="{{$request->created_at}}" title="{{$request->created_at}}"></time>
+                                    </span>
                                 </div>
                             </a>
                         </li>
                         <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
+                        @endforeach
+                        
                     </ul>
                     <!-- /.dropdown-alerts -->
                 </li>
@@ -105,10 +68,9 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="{{ route('adminProfile') }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
+
                         <li class="divider"></li>
                         <li>
                         <a class="dropdown-item" href="{{ route('logout') }}"
@@ -133,22 +95,12 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- /input-group -->
+
+                        <li> 
+                            <a href="{{route('adminDashboard')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="{{url('/')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Rooms<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-home"></i> Rooms<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{route('roomCatIndex')}}">Rooms Category</a>
@@ -160,7 +112,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Tenants<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-user"></i> Tenants<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{route('tenantIndex')}}">Tenants</a>
@@ -172,58 +124,72 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Requests<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bell"></i> Requests<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{ route('requestAdminIndex') }}">All</a>
                                 </li>
                                 <li>
-                                    <a href="#">Change of Room</a>
+                                    <a href="{{ route('requestChangeRoom') }}">Change of Room</a>
                                 </li>
                                 <li>
-                                    <a href="#}">Food</a>
+                                    <a href="{{ route('requestFood') }}">Food</a>
                                 </li>
                                 <li>
-                                    <a href="#">Laundry</a>
-                                </li>
-                                <li>
-                                    <a href="#">Others</a>
+                                    <a href="{{ route('requestLaundry') }}">Laundry</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Billing<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-cart-plus"></i> Billing<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{ route('billIndex') }}">All</a>
                                 </li>
                                 <li>
-                                    <a href="#">Room Bills</a>
+                                    <a href="{{ route('roomBills') }}">Room Bills</a>
                                 </li>
                                 <li>
-                                    <a href="#">Rent</a>
+                                    <a href="{{ route('allTenatnBills') }}">Tenant Bills</a>
                                 </li>
                                 <li>
-                                    <a href="#">Others</a>
+                                    <a href="{{ route('allTenatnBillsHistory') }}">Tenants Bills History</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
+                            <a href="#"> <i class="fa fa-clock-o"></i> Timings<span class="fa arrow"></span> </a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ route('timeIndex') }}"> Time Management </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Reports<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Tenants</a>
+                                    <a href="{{ route('tenantReports') }}">Tenants</a>
                                 </li>
                                 <li>
-                                    <a href="#">Total revenue</a>
+                                    <a href="{{ route('revenue') }}">Payments</a>
                                 </li>
                                 <li>
-                                    <a href="#">Rent</a>
+                                    <a href="{{ route('rentReport') }}">Rent</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-cog fa-spin fa-fw"></i> Settings<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ route('settingIndex') }}">Hostel Information</a>
                                 </li>
                                 <li>
-                                    <a href="#">Others</a>
+                                    <a href="{{ route('administrators') }}">Administrator</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

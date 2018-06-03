@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'admin/setting/admins';
 
     /**
      * Create a new controller instance.
@@ -37,7 +37,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**
@@ -63,10 +63,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        \Session::flash('success', 'New admin have been created.');
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
+            'national_number' => $data['national_number'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function edit($id)
+    {
+        $admin = User::where('id',$id)->first();
+        return view('admin.users.edit', compact('admin'));
     }
 }

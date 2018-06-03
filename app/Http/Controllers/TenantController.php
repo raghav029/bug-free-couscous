@@ -7,7 +7,11 @@ use App\Tenant;
 use Illuminate\Http\RedirectResponse;
 use App\Room;
 use App\RoomCategory;
-use App\RequestType;
+use App\RequestsType;
+use App\Requests;
+use App\InOut;
+use App\TenantBill;
+use App\RoomBill;
 
 class TenantController extends Controller
 {
@@ -18,16 +22,21 @@ class TenantController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['tenantHome']);
-        // $this->middleware('');
-        // echo "into tenant";exit();
-        // $this->middleware('tenant');
+        $this->middleware('auth')->except(['tenantHome', 'tenantRequests','tenantRequest','tenantProfile', 'tenantProfileUpdate','tenantRequestStore', 'tenantRequestHistory']);
     }
 
     public function index()
     {
         $tenants = Tenant::where('is_active',1)->paginate(10);
         return view('tenant.index', compact('tenants'));
+    }
+
+    public function tenantView($id)
+    {
+        $tenant = Tenant::find($id);
+        $tenant_timing = InOut::where('tenant_id', $id)->get();
+        $payments = TenantBill::where('tenant_id', $tenant->id)->get();
+        return view('tenant.view', compact('tenant', 'tenant_timing', 'payments'));
     }
 
     public function create()
@@ -83,14 +92,92 @@ class TenantController extends Controller
 
     public function tenantHome()
     {
-        // dd(Auth::tenants()->name);
-        $tenant = Tenant::with('rooms')->find(session('tenant_id'));
-        return view('tenant.frontend.index', compact('tenant'));
+        if(session('tenant_id')){
+            $tenant = Tenant::with('rooms')->find(session('tenant_id'));
+            $notifications = Requests::where('tenant_id', session('tenant_id'))->get();
+            $total_tenants = Tenant::count();
+            $total_rooms = Room::count();
+            $total_requests = Requests::where('tenant_id', session('tenant_id'))->count();
+            $total_bills = RoomBill::count();
+            return view('tenant.frontend.index', compact('tenant','notifications', 'total_tenants', 'total_rooms', 'total_requests', 'total_bills'));
+        }else{
+            return redirect()->route('tenatLogin');
+        }
     }
 
     public function tenantRequests()
     {
-        $request_types = RequestType::get();
-        // return view('');
+        if(session('tenant_id')){
+            $request_types = Requests::with('requestsType')->where('tenant_id', session('tenant_id'))->get();
+            // dd($request_types);
+            return view('tenant.frontend.requests.index', compact('request_types'));
+        }else{
+            return redirect()->route('tenatLogin');
+        }
+    }
+
+    public function tenantRequest()
+    {
+        if(session('tenant_id')){
+            $request_types = RequestsType::pluck('request_name', 'id');
+            return view('tenant.frontend.requests.create', compact('request_types'));
+        }else{
+            return redirect()->route('tenatLogin');
+        }
+    }
+    public function tenantRequestStore(Request $request)
+    {
+        // dd(session('tenant_id'));
+        $requests = new Requests;
+        $requests->requests_type_id = $request->requests_type_id;
+        $requests->description = $request->description;
+        $requests->tenant_id = session('tenant_id');
+        $requests->status = 0;
+        $requests->save();
+        \Session::flash('success', 'Your request have been notified to admin.');
+        return redirect()->route('tenantRequestIndex');
+    }
+    public function tenantRequestHistory()
+    {
+        if(session('tenant_id')){
+            $request_types = Requests::with('requestsType')
+            ->where('status', 1)
+            ->where('tenant_id', session('tenant_id'))->get();
+            return view('tenant.frontend.requests.history', compact('request_types'));
+        }else{
+            return redirect()->route('tenatLogin');
+        }
+    }
+
+    public function tenantBillsPayment(Request $request)
+    {
+        dd($request->al());
+    }
+
+    public function tenantProfile()
+    {
+        if(session('tenant_id')){
+            $profile = Tenant::find(session('tenant_id'));
+            return view("tenant.frontend.profile", compact('profile'));
+        }else{
+            return redirect()->route('tenatLogin');
+        }
+    }
+
+    public function tenantProfileUpdate(Request $request)
+    {
+        if(session('tenant_id')){
+            $tenant = Tenant::find(session('tenant_id'));
+            $tenant->name = $request->name;
+            $tenant->email = $request->email;
+            $tenant->phone = $request->phone;
+            $tenant->description = $request->description;
+            $tenant->save();
+            \Session::flash('success', 'Profile have been updated');
+            return redirect()->back();
+        }else{
+            return redirect()->route('tenatLogin');
+        }
+
     }
 }

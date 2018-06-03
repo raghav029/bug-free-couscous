@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Create Room</h1>
+            <h1 class="page-header">Edit Room</h1>
         </div>
                 @foreach (['danger', 'warning', 'success', 'error','info'] as $key)
                 @if(Session::has($key))

@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Room;
 use App\RoomCategory;
 use App\RoomAllocation;
+use App\InOut;
 use DB;
 
 class RoomAllocationController extends Controller
@@ -42,9 +43,18 @@ class RoomAllocationController extends Controller
         $roomAllocation = new RoomAllocation($request->all());
         $roomAllocation->user_id = $request->user()->id;
         $roomAllocation->save();
+        $room = Room::where('id', $request->room_id)->update([
+            'is_assigned'=> 1
+        ]);
         $tenant = Tenant::where('id', $request->input('tenant_id'))
         ->update([
             'room_allocation_status'=> 1
+        ]);
+
+        $inout = InOut::create([
+            'tenant_id' => $request->input('tenant_id'),
+            'is_active' => 1,
+            'user_id' => $request->user()->id
         ]);
         return redirect()->back();
         // dd($request->all());

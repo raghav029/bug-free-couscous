@@ -30,8 +30,7 @@
                         {!! Form::number('amount', $bill->amount, ['class'=> 'form-control']) !!}
                         
                         <br>
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                        <a type="button" class="btn btn-warning" href="{{ route('billDisperse', $bill->id) }}">Disperse</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         <a type="button" class="btn btn-danger" href="{{ route('billIndex') }}">Back</a>
                     </form>
             </div>

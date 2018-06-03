@@ -18,7 +18,11 @@ class TenantLoginController extends Controller
     public function showLoginForm()
     {
       // echo "test";exit;
-      return view('tenant.login');
+      if(session('tenant_id')){
+        return redirect()->route('tenantHome');
+      }else{
+        return view('tenant.login');
+      }
     }
     public function login(Request $request)
     {
@@ -27,13 +31,6 @@ class TenantLoginController extends Controller
         'email'   => 'required|email',
         'password' => 'required|min:6'
         ]);
-        // Attempt to log the user in
-      //   if (Auth::guard('tenant')->attempt(['email' => $request->email, 'password' => $request->password])) {
-      //   // dd('into if');
-      //   // echo "yrdyd";
-      //   // if successful, then redirect to their intended location
-      //   return redirect()->route('tenantHome');
-      // }
       //Attemp to log the tenant in
       $tenant = DB::table('tenants')
       ->where('email', $request->input('email'))
@@ -48,13 +45,24 @@ class TenantLoginController extends Controller
           // dd(session('tenant_id'));
           return redirect()->route('tenantHome');
         }else{
-          echo redirect()->back()->withInput($request->only('email', 'remember'));
+          return redirect()->back()->withInput($request->only('email', 'remember'));
         }
       }else{
-        echo redirect()->back()->withInput($request->only('email', 'remember'));
+        return redirect()->back()->withInput($request->only('email', 'remember'));
       }
       // dd($tenant);
       // if unsuccessful, then redirect back to the login with the form data
       // return redirect()->back()->withInput($request->only('email', 'remember'));
+    }
+
+
+    public function tenantLogout(Request $request)
+    {
+      if(session()->flush()){
+        return '/login';
+      }else{
+        \Session::flash('success', 'Unable to logout');
+        return redirect()->back();
+      }
     }
 }

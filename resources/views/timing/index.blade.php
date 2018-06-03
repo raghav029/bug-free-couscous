@@ -1,15 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-                <div class="card-body">
-                @if(Session::has('success'))
-                    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
-                @endif
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Time In Out</h1>
+        </div>
+            <div class="text-right">
+                <!-- <a href="{{route('roomRentCreate')}}" class="btn btn-primary">Create</a> -->
+            </div>
+        <br>
+            @if(Session::has('success'))
+                <div class="alert alert-success">
+                    <span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em>
+                </div>
+            @elseif(Session::has('error'))
+                <div class="alert alert-error">
+                    <span class="glyphicon glyphicon-warning-sign"></span><em> {!! session('error') !!}</em>
+                </div>
+            @endif
+            <div class="card-body">
                 <table class="table table-stripped">
                     <tr>
                         <th>Name:</th>
@@ -31,9 +41,8 @@
                     </tr>
                     @endforeach
                 </table>
-                
                 </div>
-            </div>
+        <div>
         </div>
     </div>
 </div>

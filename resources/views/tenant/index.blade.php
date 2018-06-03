@@ -23,7 +23,7 @@
                     </tr>
                     @foreach ($tenants as $tenant)
                     <tr>
-                        <td>{{ $tenant->name }}</td>
+                        <td><a href="{{ route('tenantView', $tenant->id) }}">{{ $tenant->name }}</a></td>
                         <td>{{ $tenant->email }}</td>
                         <td>{{ $tenant->phone }}</td>
                         <td>{{ $tenant->description }}</td>

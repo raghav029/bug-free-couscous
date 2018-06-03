@@ -32,7 +32,7 @@
                         
                         {!! Form::Label('rent', 'Rent:') !!}
                         {!! Form::number('rent', '', ['class' => 'form-control']) !!}
-                        
+                        {{ Form::input('is_assigned', 0)}}
                         
                         Active: {!! Form::radio('is_active', 1, true) !!}
                         Inactive:{!! Form::radio('is_active',0) !!}

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    protected $fillale = ['name', 'number', 'description','room_category_id', 'is_active'];
+    protected $fillale = ['name', 'number', 'description','room_category_id','is_assigned','is_active'];
 
     protected $guarded = ['_token'];
 

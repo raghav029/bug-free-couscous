@@ -1,63 +1,138 @@
-@extends('layouts.app')
+@extends('layouts_tenant.app')
 
 @section('content')
+<div id="wrapper">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Blank</h1>
-            <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                @if(Session::has('success'))
-                    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
-                @endif
-                <table>
-                    <tr>
-                    <th>Name:</th>
-                    <th>Email:</th>
-                    <th>Phone:</th>
-                    <th>Description:</th>
-                    <th>Action:</th>
-                    </tr>
-                Tenant Dashboard    
-                </table>
-                
+        <!-- Navigation -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{$total_tenants}}</div>
+                                    <div>New Tenants!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-home fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{ $total_rooms }}</div>
+                                    <div>Rooms!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ route('roomIndex') }}">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-bell fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{ $total_requests }}</div>
+                                    <div>Requests!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-cart-plus fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{ $total_bills }}</div>
+                                    <div>Support Tickets!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
-</div>
-<!-- /.container-fluid -->
-<!-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                @if(Session::has('success'))
-                    <div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em></div>
-                @endif
-                <table>
-                    <tr>
-                    <th>Name:</th>
-                    <th>Email:</th>
-                    <th>Phone:</th>
-                    <th>Description:</th>
-                    <th>Action:</th>
-                    </tr>
-                Tenant Dashboard    
-                </table>
+            <!-- /.row -->
+            <div class="row">
                 
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group">
+                                @foreach($notifications as $notify)
+                                <a href="" class="list-group-item">
+                                    <i class="fa fa-comment fa-fw"></i> New {{$notify->requestsType->request_name}} request
+                                    <span class="pull-right text-muted small"><em>{{ date("jS F, Y  (H:i)", strtotime($notify->created_at)) }}</em>
+                                    </span>
+                                </a>
+                                @endforeach
+                                
+                            </div>
+                            <!-- /.list-group -->
+                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    
                 </div>
+                <!-- /.col-lg-4 -->
             </div>
-        </div>
+            <!-- /.row -->
+
     </div>
-</div> -->
+    <!-- /#wrapper -->
 @endsection

@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Admin Dashboard</h1>
+            <h1 class="page-header">Requests</h1>
         </div>
         <br>
             @if(Session::has('success'))

@@ -1,12 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Register Admin</h1>
+        </div>
+        <br>
+            @if(Session::has('success'))
+                <div class="alert alert-success">
+                    <span class="glyphicon glyphicon-ok"></span><em> {!! session('success') !!}</em>
+                </div>
+            @elseif(Session::has('error'))
+                <div class="alert alert-error">
+                    <span class="glyphicon glyphicon-warning-sign"></span><em> {!! session('error') !!}</em>
+                </div>
+            @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -34,6 +43,34 @@
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
+
+                                @if ($errors->has('phone'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="national_number" class="col-md-4 col-form-label text-md-right">{{ __('National Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="national_number" type="national_number" class="form-control{{ $errors->has('national_number') ? ' is-invalid' : '' }}" name="national_number" value="{{ old('national_number') }}" required>
+
+                                @if ($errors->has('national_number'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('national_number') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -69,8 +106,8 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
+                    </div>
+        <div>
         </div>
     </div>
 </div>
