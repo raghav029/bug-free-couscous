@@ -13,10 +13,10 @@
 
 
     <!-- Styles -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/metisMenu.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/sb-admin-2.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/font-awesome/css/font-awesome.min.css') }}">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/metisMenu.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/sb-admin-2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -123,10 +123,10 @@
             @yield('content')
         </div>
     </div>
-    <script src="{{ asset('public/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('public/js/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('public/js/sb-admin-2.min.js') }}"></script>
-    <script src="{{ asset('public/js/scripts.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 </html>

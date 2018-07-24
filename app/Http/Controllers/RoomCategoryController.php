@@ -21,11 +21,18 @@ class RoomCategoryController extends Controller
 
     public function store(Request $request)
     {
+        $this->roomCategoryValidation($request);
         $roomsCategory = new RoomCategory($request->all());
         $roomsCategory->save();
         \Session::flash('success','New Room Category have been added.');
         // dd($request->all());
         return redirect()->route('roomCatIndex');
+    }
+
+    public function roomCategoryValidation(Request $data){
+        return $data->validate([
+            'name'=> 'required|string|max:255',
+        ]);
     }
 
     public function edit($id)

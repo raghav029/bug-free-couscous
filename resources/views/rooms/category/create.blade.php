@@ -11,7 +11,13 @@
                 {{ csrf_field() }}
                 {!! Form::label('name', 'Category name:') !!}
                 {!! Form::text('name', '', ['class'=> 'form-control']) !!}
-                
+                @if ($errors->has('name'))
+                    <span class="invalid-feedback">
+                        <strong><i>{{ $errors->first('name') }}</i></strong>
+                    </span>
+                @endif
+                <br>
+                <br>
                 {!! Form::label('description', 'Category Description:') !!}
                 {!! Form::textarea('description', '', ['class'=> 'form-control']) !!}
                 {!! Form::hidden('is_active', 1, ['class'=> 'form-control']) !!}

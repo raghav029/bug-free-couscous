@@ -13,9 +13,9 @@
 
 
     <!-- Styles -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/font-awesome/css/font-awesome.min.css') }}">
-    <link href="{{ asset('public/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
 </head>
 <body>
