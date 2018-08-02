@@ -39,6 +39,7 @@
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Please Sign In</h3>
+                        <a href="{{ route('tenatLogin') }}"><h3 class="panel-title">Sign In as Tenant</h3>
                     </div>
                     <div class="panel-body">
                     <form method="POST" action="{{ route('login') }}" role="form" style="display: block;">
