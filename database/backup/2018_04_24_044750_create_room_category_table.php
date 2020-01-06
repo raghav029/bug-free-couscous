@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTenantBillsTable extends Migration
+class CreateRoomCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateTenantBillsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tenant_bills', function (Blueprint $table) {
+        Schema::create('room_category', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('description');
+            $table->boolean('is_active');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateTenantBillsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tenant_bills');
+        Schema::dropIfExists('room_category');
     }
 }

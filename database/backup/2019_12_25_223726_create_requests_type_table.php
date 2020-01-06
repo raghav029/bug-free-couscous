@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateRoomCategoryTable extends Migration
+class CreateRequestsTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateRoomCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('room_category', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('requests_type', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('name');
-            $table->boolean('is_active');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateRoomCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('room_category');
+        Schema::dropIfExists('requests_type');
     }
 }
